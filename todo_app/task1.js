@@ -15,11 +15,7 @@ function main() {
         'title': title,
         'body': body
       }
-      try {
-        console.log(notes.add(newNote));
-      } catch (err) {
-        console.log(err);
-      }
+      console.log(notes.add(newNote));
       break;
     case 'list':
       console.log(notes.list());

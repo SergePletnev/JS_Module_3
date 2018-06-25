@@ -5,13 +5,13 @@ const notesList = require(pathToNotesFile);
 
 function addUniqueNote(newNote) {
     const note = notesList.find(el => el.title === newNote.title);
-    if (note === undefined){
-        return `The note with title [${newNote.title}] is already in the notes list. You can add notes only with unique titles.`;
+    if (note === undefined) {
+        notesList.push(newNote);
+        const json = JSON.stringify(notesList, null, 2);
+        fs.writeFileSync(pathToNotesFile, json);
+        return `The note with title [${newNote.title}] has been added successfully to the notes list`;
     }
-    notesList.push(newNote);
-    const json = JSON.stringify(notesList, null, 2);
-    fs.writeFileSync(pathToNotesFile, json);
-    return `The note with title [${newNote.title}] has been added successfully to the notes list`;
+    return `The note with title [${newNote.title}] is already in the notes list. You can add notes only with unique titles.`;
 }
 
 function listAllNotes() {
