@@ -1,8 +1,30 @@
 const notes = require('./notes-handler.js')
 
 const argv = require('yargs')
-  .usage('Usage: $0 [operation: (add, list, read, remove)] --title [str] [optional] --body [str] [optional]')
+  .demandCommand()
+  .command('add', 'Add new note to the notes list', function (yargs) {
+    yargs
+    .example('$0 add --t "title" --b "body"')
+    .demandOption(['t', 'b'])
+  })
+  .command('list', 'List all the notea of the notes list', function (yargs) {
+    yargs
+    .example('$0 list"')
+  })
+  .command('read', 'Read note by title', function (yargs) {
+    yargs
+    .example('$0 read --t "title"')
+    .demandOption(['t'])
+  })
+  .command('remove', 'Remove note by title', function (yargs) {
+    yargs
+    .example('$0 remove --t "title"')
+    .demandOption(['t'])
+  })
+  .alias('t', 'title')
+  .alias('b', 'body')
   .argv;
+
 
 function main() {
   const operation = argv._[0];
@@ -27,7 +49,7 @@ function main() {
       console.log(notes.remove(title));
       break;
     default:
-      console.log('Usage: node task1 [operation: (add, list, read, remove)] --title [str] [optional] --body [str] [optional]');
+      console.log(`Usage: node task1 [operation: (add, list, read, remove)] --title [str] [optional] --body [str] [optional]`);
   }
 }
 

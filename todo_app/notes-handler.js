@@ -52,8 +52,3 @@ const notes = {
 };
 
 module.exports = notes;
-
-
-// notesList.splice(0, 1);
-// const json = JSON.stringify(notesList, null, 2);
-// fs.writeFileSync('./resources/1.json', json);
