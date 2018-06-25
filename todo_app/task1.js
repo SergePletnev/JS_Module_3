@@ -49,7 +49,7 @@ function main() {
       console.log(notes.remove(title));
       break;
     default:
-      console.log(`Usage: node task1 [operation: (add, list, read, remove)] --title [str] [optional] --body [str] [optional]`);
+      console.log(`Only the next commands can be used: [add, list, read, remove]`);
   }
 }
 
