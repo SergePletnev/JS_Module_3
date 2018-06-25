@@ -11,12 +11,12 @@ function main() {
   const body = argv.body;
   switch (operation) {
     case 'add':
-      note = {
+      const newNote = {
         'title': title,
         'body': body
       }
       try {
-        console.log(notes.add(note));
+        console.log(notes.add(newNote));
       } catch (err) {
         console.log(err);
       }
