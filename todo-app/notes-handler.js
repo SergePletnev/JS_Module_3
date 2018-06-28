@@ -1,57 +1,59 @@
 const fs = require('fs');
 
-const pathToNotesFile = './resources/notes.json';
-const notesList = require(pathToNotesFile);
+class Notes {
 
-function addUniqueNote(newNote) {
-    const note = notesList.find(el => el.title === newNote.title);
-    if (note === undefined) {
-        notesList.push(newNote);
-        writeJSONFile(pathToNotesFile, notesList);
-        return `The note with title [${newNote.title}] has been added successfully to the notes list`;
+    constructor(pathToNotesFile) {
+        this.pathToNotesFile = pathToNotesFile;
+        this.notesList = this.checkAndReadNotesFile();
     }
-    return `The note with title [${newNote.title}] is already in the notes list. You can add notes only with unique titles.`;
-}
 
-function listAllNotes() {
-    return (notesList.length > 0) ? notesList : 'The notes list is empty.';
-}
-
-function readNote(title) {
-    const note = notesList.find(el => el.title === title);
-    const result = (note !== undefined) ? note : `There is no note with title [${title}] in the notes list`;
-    return result;
-}
-
-function removeNote(title) {
-    const index = notesList.findIndex(el => el.title == title);
-    if (index > -1) {
-        notesList.splice(index, 1);
-        writeJSONFile();
-        return `The note with title [${title}] has been successfully removed`;
-    } else {
-        return `There is no note with title [${title}] in the notes list`;
+    add(newNote) {
+        const note = this.notesList.find(el => el.title === newNote.title);
+        if (note === undefined) {
+            this.notesList.push(newNote);
+            this.writeNotesToJSONFile();
+            return `The note with title [${newNote.title}] has been added successfully to the notes list.`;
+        }
+        return `The note with title [${newNote.title}] is already in the notes list. You can add notes only with unique titles.`;
     }
-}
 
-function writeJSONFile() {
-    const jsonString = JSON.stringify(notesList, null, 2);
-    fs.writeFileSync(pathToNotesFile, jsonString);
-}
-
-const notes = {
-    add: (note) => {
-        return addUniqueNote(note);
-    },
-    list: () => {
-        return listAllNotes();
-    },
-    read: (title) => {
-        return readNote(title);
-    },
-    remove: (title) => {
-        return removeNote(title);
+    list() {
+        return (this.notesList.length > 0) ? this.notesList : 'The notes list is empty.';
     }
-};
 
-module.exports = notes;
+    read(title) {
+        const note = this.notesList.find(el => el.title === title);
+        const result = (note !== undefined) ? note : `There is no note with title [${title}] in the notes list.`;
+        return result;
+    }
+
+    remove(title) {
+        const index = this.notesList.findIndex(el => el.title == title);
+        if (index > -1) {
+            this.notesList.splice(index, 1);
+            this.writeNotesToJSONFile();
+            return `The note with title [${title}] has been successfully removed.`;
+        } else {
+            return `There is no note with title [${title}] in the notes list.`;
+        }
+    }
+
+    checkAndReadNotesFile() {
+        try {
+            const notes = require(this.pathToNotesFile);
+            return notes;
+        } catch(err) {
+            const emptyNotesFileContent = '[]';
+            fs.writeFileSync(this.pathToNotesFile, emptyNotesFileContent);
+            return JSON.parse(emptyNotesFileContent); 
+        }
+    }
+
+    writeNotesToJSONFile() {
+        const jsonString = JSON.stringify(this.notesList, null, 2);
+        fs.writeFileSync(this.pathToNotesFile, jsonString);
+    }
+
+}
+
+module.exports = Notes;
