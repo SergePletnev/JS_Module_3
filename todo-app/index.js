@@ -67,8 +67,12 @@ function main() {
         body: body,
         date: date
       }
-      result = notes.add(newNote);
-      console.log(result);
+      try{
+        result = notes.add(newNote);
+        console.log(result);
+      } catch(err) {
+        console.log(err.message);
+      }
       break;
     case 'list':
       result = notes.list();
@@ -91,8 +95,12 @@ function main() {
       console.log(result);
       break;
     case 'sort':
-      result = notes.sort(argv.sortType, argv.order);
-      console.log(result);
+      try {
+        result = notes.sort(argv.sortType, argv.order);
+        console.log(result);
+      } catch (err) {
+        console.log(err.message);
+      }
       break;
     case 'update':
       if (argv.newTitle === undefined && argv.newBody === undefined) {

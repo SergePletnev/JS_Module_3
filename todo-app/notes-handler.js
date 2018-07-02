@@ -16,7 +16,7 @@ class Notes {
             this.writeNotesToJSONFile();
             return `The note with title [${newNote.title}] has been added successfully to the notes list.`;
         }
-        return `The note with title [${newNote.title}] is already in the notes list. You can add notes only with unique titles.`;
+        throw new Error(`The note with title [${newNote.title}] is already in the notes list. You can add notes only with unique titles.`);
     }
 
     list() {
@@ -89,31 +89,13 @@ class Notes {
                         return note1.body.length > note2.body.length;
                     if (order === 'desc')
                         return note1.body.length < note2.body.length;
+                default:
+                    throw new Error(`[${sortType}] is unsupported sort type. You can sort only by: title, titleLength, bodyLength and date.`);
             }
         })
 
         this.writeNotesToJSONFile();
         return `The notes have been sorted by ${sortType} in ${order} order.`;
-
-        // this.notesList.sort((a, b) => {
-        //     switch (sortType) {
-        //         case ('date'):
-        //             if (order === 'asc') {
-        //                 return a.date.toString() > b.date.toString();
-        //             }
-        //             if (order === 'desc') {
-        //                 return b.date > a.date;
-        //             }
-        //             this.writeNotesToJSONFile();
-        //             return `The notes have been sorted by date in ${order} order`;
-        //         case ('title'):
-
-        //         case ('titleLength'):
-
-        //         case ('bodyLength'):
-        //     }
-        // })
-
     }
 
     update(option, title, updateInfo) {
