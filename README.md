@@ -61,7 +61,7 @@ This command will update title or body of the specified note. You can update onl
 
 #### Sort notes
 ```
-index.js sort --type "Sort Type" --order "Sort Order"
+index.js sort --sortType "Sort Type" --order "Sort Order"
 ```
 This command will sort the notes by sort types: [title, titleLength, bodyLength and date] and orders: [asc, desc]. This commands sorts notes by title in ascending order if it is launched without parameters.
 
