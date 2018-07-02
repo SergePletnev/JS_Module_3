@@ -10,7 +10,7 @@ Application for your notes. Using it you can perform the following operations wi
 - Read notes from xlsx file
 - Write notes to xlsx file
 - Update title or body of the selected note
-- Sort notes by title, title lengh, body length and date
+- Sort notes by title, title lengh, body length or date of adding
 
 ## Usage
 Note: Aplication should be started in directory containing its files (todo-app).
