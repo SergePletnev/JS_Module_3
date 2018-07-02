@@ -8,6 +8,9 @@
 
 ### Node.s ###
 node_modules/
+package-lock.json
+
+### Resources ###
 *.json
 test.js
 *.xlsx
