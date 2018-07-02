@@ -1,6 +1,6 @@
 const fs = require('fs');
 var XLSX = require('xlsx')
-const { Workbook } = require('excel4node');
+const excel4node = require('excel4node');
 
 class Notes {
 
@@ -24,13 +24,13 @@ class Notes {
     }
 
     read(title) {
-        const note = this.notesList.find(el => el.title === title);
+        const note = this.notesList.find(note => note.title === title);
         const result = (note !== undefined) ? note : `There is no note with title [${title}] in the notes list.`;
         return result;
     }
 
     remove(title) {
-        const index = this.notesList.findIndex(el => el.title == title);
+        const index = this.notesList.findIndex(note => note.title == title);
         if (index > -1) {
             this.notesList.splice(index, 1);
             this.writeNotesToJSONFile();
@@ -49,15 +49,15 @@ class Notes {
     }
 
     writeXLSX(pathXLSX) {
-        const workBook = new Workbook();
+        const workBook = new excel4node.Workbook();
         const workSheet = workBook.addWorksheet('Sheet1');
         workSheet.cell(1, 1).string('title');
         workSheet.cell(1, 2).string('body');
         workSheet.cell(1, 3).string('date');
-        this.notesList.forEach((element, index) => {
-            workSheet.cell(index + 2, 1).string(element.title);
-            workSheet.cell(index + 2, 2).string(element.body);
-            workSheet.cell(index + 2, 3).string(element.date);
+        this.notesList.forEach((note, index) => {
+            workSheet.cell(index + 2, 1).string(note.title);
+            workSheet.cell(index + 2, 2).string(note.body);
+            workSheet.cell(index + 2, 3).string(note.date);
         });
         workBook.write(pathXLSX);
         return `The notes have been successfully written to xlsx file: [${pathXLSX}].`
