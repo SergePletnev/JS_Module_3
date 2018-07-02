@@ -1,4 +1,6 @@
 const fs = require('fs');
+var XLSX = require('xlsx')
+const { Workbook } = require('excel4node');
 
 class Notes {
 
@@ -38,14 +40,108 @@ class Notes {
         }
     }
 
+    readXLSX(pathXLSX) {
+        const workBook = XLSX.readFile(pathXLSX);
+        const sheetNameList = workBook.SheetNames;
+        this.notesList = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNameList[0]]);
+        this.writeNotesToJSONFile();
+        return `The notes have been successfully read from xlsx file: [${pathXLSX}].`;
+    }
+
+    writeXLSX(pathXLSX) {
+        const workBook = new Workbook();
+        const workSheet = workBook.addWorksheet('Sheet1');
+        workSheet.cell(1, 1).string('title');
+        workSheet.cell(1, 2).string('body');
+        workSheet.cell(1, 3).string('date');
+        this.notesList.forEach((element, index) => {
+            workSheet.cell(index + 2, 1).string(element.title);
+            workSheet.cell(index + 2, 2).string(element.body);
+            workSheet.cell(index + 2, 3).string(element.date);
+        });
+        workBook.write(pathXLSX);
+        return `The notes have been successfully written to xlsx file: [${pathXLSX}].`
+    }
+
+    sort(sortType, order) {
+        if (this.notesList.length === 0) {
+            return "The notes list is empty. Add some notes to sort them."
+        }
+        this.notesList.sort((note1, note2) => {
+            switch (sortType) {
+                case ('date'):
+                    if (order === 'asc')
+                        return note1.date > note2.date;
+                    if (order === 'desc')
+                        return note1.date < note2.date;
+                case ('title'):
+                    if (order === 'asc')
+                        return note1.title > note2.title;
+                    if (order === 'desc')
+                        return note1.title < note2.title;
+                case ('titleLength'):
+                    if (order === 'asc')
+                        return note1.title.length > note2.title.length;
+                    if (order === 'desc')
+                        return note1.title.length < note2.title.length;
+                case ('bodyLength'):
+                    if (order === 'asc')
+                        return note1.body.length > note2.body.length;
+                    if (order === 'desc')
+                        return note1.body.length < note2.body.length;
+            }
+        })
+
+        this.writeNotesToJSONFile();
+        return `The notes have been sorted by ${sortType} in ${order} order.`;
+
+        // this.notesList.sort((a, b) => {
+        //     switch (sortType) {
+        //         case ('date'):
+        //             if (order === 'asc') {
+        //                 return a.date.toString() > b.date.toString();
+        //             }
+        //             if (order === 'desc') {
+        //                 return b.date > a.date;
+        //             }
+        //             this.writeNotesToJSONFile();
+        //             return `The notes have been sorted by date in ${order} order`;
+        //         case ('title'):
+
+        //         case ('titleLength'):
+
+        //         case ('bodyLength'):
+        //     }
+        // })
+
+    }
+
+    update(option, title, updateInfo) {
+        const index = this.notesList.findIndex(el => el.title == title);
+        if (index > -1) {
+            switch (option) {
+                case 'title':
+                    this.notesList[index].title = updateInfo;
+                    this.writeNotesToJSONFile();
+                    return `The title of [${title}] note has been updated to [${updateInfo}]`;
+                case 'body':
+                    this.notesList[index].body = updateInfo;
+                    this.writeNotesToJSONFile();
+                    return `The body of [${title}] note has been updated to [${updateInfo}]`;
+            }
+        } else {
+            return `There is no note with title [${title}] in the notes list.`;
+        }
+    }
+
     checkAndReadNotesFile() {
         try {
             const notes = require(this.pathToNotesFile);
             return notes;
-        } catch(err) {
+        } catch (err) {
             const emptyNotesFileContent = '[]';
             fs.writeFileSync(this.pathToNotesFile, emptyNotesFileContent);
-            return JSON.parse(emptyNotesFileContent); 
+            return require(this.pathToNotesFile);
         }
     }
 
@@ -53,7 +149,6 @@ class Notes {
         const jsonString = JSON.stringify(this.notesList, null, 2);
         fs.writeFileSync(this.pathToNotesFile, jsonString);
     }
-
 }
 
 module.exports = Notes;

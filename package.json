@@ -4,6 +4,7 @@
   "description": "js_module_3",
   "main": "index.js",
   "scripts": {
+    "postinstall": "mkdir .\\todo-app\\resources",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,10 @@
   },
   "homepage": "https://github.com/SergePletnev/JS_Module_3#readme",
   "dependencies": {
+    "excel4node": "^1.3.6",
+    "moment": "^2.22.2",
+    "npm": "^6.1.0",
+    "xlsx": "^0.13.1",
     "yargs": "^11.0.0"
   }
 }
