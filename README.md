@@ -3,14 +3,14 @@
 
 # TODO app
 Application for your notes. Using it you can perform the following operations with your notes: 
--add new note, 
--read note by title
--remove by title
--list all notes
--read notes from xlsx file
--write notes to xlsx file
--update title or body of the selected note
--sort notes by title, title lengh, body length and date
+- Add new note
+- Read note by title
+- Remove by title
+- List all notes
+- Read notes from xlsx file
+- Write notes to xlsx file
+- Update title or body of the selected note
+- Sort notes by title, title lengh, body length and date
 
 ## Usage
 Note: Aplication should be started in directory containing its files (todo-app).

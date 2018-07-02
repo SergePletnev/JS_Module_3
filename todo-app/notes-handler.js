@@ -63,31 +63,31 @@ class Notes {
         return `The notes have been successfully written to xlsx file: [${pathXLSX}].`
     }
 
-    sort(sortType, order) {
+    sort(sortType, sortOrder) {
         if (this.notesList.length === 0) {
             return "The notes list is empty. Add some notes to sort them."
         }
         this.notesList.sort((note1, note2) => {
             switch (sortType) {
                 case ('date'):
-                    if (order === 'asc')
+                    if (sortOrder === 'asc')
                         return note1.date > note2.date;
-                    if (order === 'desc')
+                    if (sortOrder === 'desc')
                         return note1.date < note2.date;
                 case ('title'):
-                    if (order === 'asc')
+                    if (sortOrder === 'asc')
                         return note1.title > note2.title;
-                    if (order === 'desc')
+                    if (sortOrder === 'desc')
                         return note1.title < note2.title;
                 case ('titleLength'):
-                    if (order === 'asc')
+                    if (sortOrder === 'asc')
                         return note1.title.length > note2.title.length;
-                    if (order === 'desc')
+                    if (sortOrder === 'desc')
                         return note1.title.length < note2.title.length;
                 case ('bodyLength'):
-                    if (order === 'asc')
+                    if (sortOrder === 'asc')
                         return note1.body.length > note2.body.length;
-                    if (order === 'desc')
+                    if (sortOrder === 'desc')
                         return note1.body.length < note2.body.length;
                 default:
                     throw new Error(`[${sortType}] is unsupported sort type. You can sort only by: title, titleLength, bodyLength and date.`);
@@ -95,7 +95,7 @@ class Notes {
         })
 
         this.writeNotesToJSONFile();
-        return `The notes have been sorted by ${sortType} in ${order} order.`;
+        return `The notes have been sorted by ${sortType} in ${sortOrder} order.`;
     }
 
     update(option, title, updateInfo) {

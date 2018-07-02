@@ -40,7 +40,7 @@ function main() {
       yargs
         .options('sortType', { demand: false, desc: 'The type of sort (sort by)', default: 'title' })
         .options('order', { demand: false, desc: 'Descending! or ascending order', default: 'asc' })
-        .example('$0 sort --type "sortType" --order "sortOrder"')
+        .example('$0 sort --sortType "sortType" --order "sortOrder"')
     })
     .command('update', 'Update title or body of the note', (yargs) => {
       yargs
