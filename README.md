@@ -18,7 +18,7 @@ All the commands supports a parameter (--path or -p): path to notes file you wan
 
 #### Add a new note
 ```
-index.js add --title "Title" --body "Body"
+index.js add --title "title" --body "body"
 ```
 Parameters title and body are required.
 This command will add a new note to the notes list. Unique title should be used.
@@ -31,13 +31,13 @@ This command will list all the notes. Parameers are not required.
 
 #### Read the note by title
 ```
-index.js read --title "Title"
+index.js read --title "title"
 ```
 This command will read and display the note by its title. Parameter title is required.
 
 #### Read the note by title
 ```
-index.js remove --title "Title"
+index.js remove --title "title"
 ```
 This command will remove the note by its title. Parameter title is required.
 
@@ -55,20 +55,12 @@ This command will write notes to the specified xlsx file and write from json fil
 
 #### Update title or body of the note
 ```
-index.js update --title "Title" --newTitle "New Title" --newBody "New Body"
+index.js update --title "Title" --newTitle "new title" --newBody "new body"
 ```
 This command will update title or body of the specified note. You can update only title or body or both.
 
 #### Sort notes
 ```
-index.js sort --sortType "Sort Type" --order "Sort Order"
+index.js sort --sortType "sort type" --order "sort order"
 ```
 This command will sort the notes by sort types: [title, titleLength, bodyLength and date] and orders: [asc, desc]. This commands sorts notes by title in ascending order if it is launched without parameters.
-
-
-
-
-
-
-
-
