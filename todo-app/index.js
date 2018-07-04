@@ -1,5 +1,4 @@
 const moment = require('moment');
-const path = require('path');
 
 const Notes = require('./notes-handler.js')
 
