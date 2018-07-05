@@ -65,6 +65,7 @@ index.js sort --sortType "sort type" --order "sort order"
 ```
 This command will sort the notes by sort types: [title, titleLength, bodyLength and date] and orders: [asc, desc]. This commands sorts notes by title in ascending order if it is launched without parameters.
 
+
 # Get-R&MCharacters app
 Application for finding characters in R&M Characters DB [rickandmortyapi.com](https://rickandmortyapi.com/).
 
@@ -85,9 +86,9 @@ Note: Aplication should be started in directory containing its files (get-richan
 You can use any combination of these parameters for searching.
 
 ### Examples:
-`node index.js --id 2`
-`node index.js --name 'rick sanchez' --status alive`
-`node index.js --gender male --specious human`
-`node index.js --gender Female --specious Human`
+`node index.js --id 2`<br>
+`node index.js --name 'rick sanchez' --status alive`<br>
+`node index.js --gender male --specious human`<br>
+`node index.js --gender Female --specious Human`<br>
 
 
