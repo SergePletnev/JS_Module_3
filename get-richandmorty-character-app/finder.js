@@ -18,11 +18,11 @@ function checkCharacter(parameters, character) {
     let flag = true;
     Object.keys(parameters).forEach(el => {
         if (el === 'location' || el === 'origin')
-            if (character[el].name !== parameters[el].name) {
+            if (character[el].name.toLowerCase() !== parameters[el].name.toLowerCase()) {
                 flag = false;
                 return;
             }
-        if (character[el] !== parameters[el]) {
+        if (character[el].toString().toLowerCase() !== parameters[el].toString().toLowerCase()) {
             flag = false;
             return;
         }

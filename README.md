@@ -64,3 +64,30 @@ This command will update title or body of the specified note. You can update onl
 index.js sort --sortType "sort type" --order "sort order"
 ```
 This command will sort the notes by sort types: [title, titleLength, bodyLength and date] and orders: [asc, desc]. This commands sorts notes by title in ascending order if it is launched without parameters.
+
+# Get-R&MCharacters app
+Application for finding characters in R&M Characters DB [rickandmortyapi.com](https://rickandmortyapi.com/).
+
+## Usage
+Note: Aplication should be started in directory containing its files (get-richandmorty-character-app).
+
+### Available parameters for searh:
+
+* --id, -i         Number of ID
+* --name, -n       Name of character
+* --status, --st   Status: alive or dead
+* --species, --sp  Species of character
+* --type, -t       Type
+* --gender, -g     Gender: male or female
+* --origin, -o     Origin name
+* --location, -l   Location name
+
+You can use any combination of these parameters for searching.
+
+### Examples:
+`node index.js --id 2`
+`node index.js --name 'rick sanchez' --status alive`
+`node index.js --gender male --specious human`
+`node index.js --gender Female --specious Human`
+
+
