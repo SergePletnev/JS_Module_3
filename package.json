@@ -4,7 +4,7 @@
   "description": "js_module_3",
   "main": "index.js",
   "scripts": {
-    "postinstall": "mkdir .\\todo-app\\resources && mkdir .\\get-richandmorty-character-app\\resources",
+    "postinstall": "mkdir .\\todo-app\\resources && mkdir .\\get-rickandmorty-character-app\\resources",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
