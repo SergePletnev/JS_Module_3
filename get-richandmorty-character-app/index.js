@@ -9,9 +9,9 @@ const requestURI = 'https://rickandmortyapi.com/api/character/';
 function main() {
     let args = yargs
         .usage('Usage: node $0 --id [number] --type [string]')
-        .example('$0 -i 1')
-        .example('$0 -n Varrix')
-        .example('$0 -i 22 -n Varrix')
+        .example('$0 --i 1')
+        .example('$0 --name "rick sanchez" --status alive')
+        .example('$0 --gender male --specious human')
         .options({
             'i': { alias: 'id', nargs: 1, type: 'number' },
             'n': { alias: 'name', nargs: 1, type: 'string' },
