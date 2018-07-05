@@ -1,6 +1,13 @@
 # JS_Module_3
 **TODO app** and **App** for finding a specific character in the database (rickandmortyapi.com)
 
+# Deploy
+
+#### $ npm install
+
+Before running the applications [npm install] command should be run.<br>
+It downloads needed modules and environment for apps.
+
 # TODO app
 Application for your notes. Using it you can perform the following operations with your notes: 
 - Add new note

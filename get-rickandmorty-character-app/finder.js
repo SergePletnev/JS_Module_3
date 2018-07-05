@@ -17,12 +17,18 @@ function getRMDB(uri) {
 function checkCharacter(parameters, character) {
     let flag = true;
     Object.keys(parameters).forEach(el => {
-        if (el === 'location' || el === 'origin')
-            if (character[el].name.toLowerCase() !== parameters[el].name.toLowerCase()) {
+        if (el === 'id')
+            if (character[el] !== parameters[el]) {
                 flag = false;
                 return;
             }
-        if (character[el].toString().toLowerCase() !== parameters[el].toString().toLowerCase()) {
+        if (el === 'location' || el === 'origin') {
+            if (character[el]['name'].toLowerCase().indexOf(parameters[el].toLowerCase()) !== 0) {
+                flag = false;
+                return;
+            }
+        }
+        if (character[el].toString().toLowerCase().indexOf(parameters[el].toString().toLowerCase()) !== 0) {
             flag = false;
             return;
         }
@@ -44,7 +50,12 @@ function findCharacters(uri, args, filePath) {
         .then(characters => {
             characters = characters.filter(element => element !== undefined);
             console.log(characters);
-            writeCharactersToJSONFile(filePath, characters);
+            console.log(`Nuumber of found characters: ${characters.length}`);
+            if (characters.length > 0) {
+                writeCharactersToJSONFile(filePath, characters);
+            } else {
+                throw new Error('No characters with such parameters');
+            }            
         })
         .catch(err => {
             console.log(err);
@@ -64,7 +75,7 @@ function getSupportedParameters(args) {
             params[element] = args[element]
         }
     });
-    return  params;
+    return params;
 }
 
 exports.findCharacters = findCharacters;
