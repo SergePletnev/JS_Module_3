@@ -1,25 +1,29 @@
 const fs = require("fs");
 const yargs = require("yargs");
 
-function main() {
+const finder = require('./finder.js');
 
-    const args = yargs
+const fileCharactersPath = './resources/characters.json';
+const requestURI = 'https://rickandmortyapi.com/api/character/';
+
+function main() {
+    let args = yargs
         .usage('Usage: node $0 --id [number] --type [string]')
         .example('$0 -i 1')
         .example('$0 -n Varrix')
         .example('$0 -i 22 -n Varrix')
         .options({
-            'i': { alias: 'id', type: "number" },
-            'n': { alias: 'name', type: 'string' },
-            'st': { alias: 'status', type: 'string' },
-            'sp': { alias: 'species', type: 'string' },
-            't': { alias: 'type', type: 'string' },
-            'g': { alias: 'gender', type: 'string' },
-            'o': { alias: 'origin', type: 'string' },
-            'l': { alias: 'location', type: 'string' }
+            'i': { alias: 'id', nargs: 1, type: 'number' },
+            'n': { alias: 'name', nargs: 1, type: 'string' },
+            'st': { alias: 'status', nargs: 1, type: 'string' },
+            'sp': { alias: 'species', nargs: 1, type: 'string' },
+            't': { alias: 'type', nargs: 1, type: 'string' },
+            'g': { alias: 'gender', nargs: 1, type: 'string' },
+            'o': { alias: 'origin', nargs: 1, type: 'string' },
+            'l': { alias: 'location', nargs: 1, type: 'string' }
         })
         .argv;
-        console.log(args.name);
+        finder.findCharacters(requestURI, args, fileCharactersPath);
 }
 
 main();

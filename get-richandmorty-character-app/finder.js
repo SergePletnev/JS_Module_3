@@ -1,48 +1,71 @@
 const rp = require('request-promise-native');
 const fs = require('fs');
 
-const requestURI = 'https://rickandmortyapi.com/api/character/';
-
-function getRichAndMortyCharacters(uri) {
-
-    rp(uri, { json: true })
+function getRMDB(uri) {
+    let charactersDB = [];
+    const getDB = (uri) => rp(uri, { json: true })
         .then(data => {
             charactersDB = [...charactersDB, ...data.results];
-            if (data.info.next) {
-                return getRichAndMortyCharacters(data.info.next);
-            } else {
+            if (data.info.next)
+                return getDB(data.info.next);
+            else
                 return charactersDB;
-            }
-        })
-        .then((charactersDB) => {
-            console.log(charactersDB.length);
-            writeCharactersToJSONFile(charactersDB);
-        })
-        .catch((error) => {
-            return error;
         });
+    return getDB(uri);
 }
 
-function writeCharactersToJSONFile(data) {
+function checkCharacter(parameters, character) {
+    let flag = true;
+    Object.keys(parameters).forEach(el => {
+        if (el === 'location' || el === 'origin')
+            if (character[el].name !== parameters[el].name) {
+                flag = false;
+                return;
+            }
+        if (character[el] !== parameters[el]) {
+            flag = false;
+            return;
+        }
+    })
+
+    if (flag)
+        return character;
+}
+
+function findCharacters(uri, args, filePath) {
+    const parameters = getSupportedParameters(args);
+    getRMDB(uri)
+        .then(data => {
+            const characters = data.map(element => {
+                return checkCharacter(parameters, element);
+            })
+            return characters;
+        })
+        .then(characters => {
+            characters = characters.filter(element => element !== undefined);
+            console.log(characters);
+            writeCharactersToJSONFile(filePath, characters);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
+
+
+function writeCharactersToJSONFile(filePath, data) {
     const jsonString = JSON.stringify(data, null, 2);
-    fs.writeFileSync('./resources/characters.json', jsonString);
+    fs.writeFileSync(filePath, jsonString);
 }
 
-// let result = [];
-// const getchars = (url) => request(url, { json: true })  //recursive function for getting characters from all pages
-//     .then((body) => {
-//         result = result.concat(body.results);           //saving results from current page
-//         if (body.info.next !== "") {                    //checking if it is the last page
-//             return getchars(body.info.next);            //if not, get characters from the next page
-//         } else return result;
-//     }).catch((err) => { return err; })
+function getSupportedParameters(args) {
+    const allSupportedARGS = ['id', 'name', 'status', 'species', 'type', 'gender', 'origin', 'location'];
+    let params = {};
+    Object.keys(args).forEach(element => {
+        if (allSupportedARGS.includes(element)) {
+            params[element] = args[element]
+        }
+    });
+    return  params;
+}
 
-// return getchars(url);
-
-// let charactersDB = [];
-getRichAndMortyCharacters(requestURI);
-
-// writeCharactersToJSONFile();
-
-// writeCharactersToJSONFile(allCharacters);
-// console.log(allCharacters.length);
+exports.findCharacters = findCharacters;
