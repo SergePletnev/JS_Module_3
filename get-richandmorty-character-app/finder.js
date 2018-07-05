@@ -51,7 +51,6 @@ function findCharacters(uri, args, filePath) {
         })
 }
 
-
 function writeCharactersToJSONFile(filePath, data) {
     const jsonString = JSON.stringify(data, null, 2);
     fs.writeFileSync(filePath, jsonString);
