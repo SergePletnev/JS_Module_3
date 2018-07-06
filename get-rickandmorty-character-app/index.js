@@ -15,8 +15,8 @@ function main() {
         .options({
             'i': { alias: 'id', nargs: 1, type: 'number' },
             'n': { alias: 'name', nargs: 1, type: 'string' },
-            'st': { alias: 'status', nargs: 1, type: 'string' },
-            'sp': { alias: 'species', nargs: 1, type: 'string' },
+            'u': { alias: 'status', nargs: 1, type: 'string' },
+            'p': { alias: 'species', nargs: 1, type: 'string' },
             't': { alias: 'type', nargs: 1, type: 'string' },
             'g': { alias: 'gender', nargs: 1, type: 'string' },
             'o': { alias: 'origin', nargs: 1, type: 'string' },

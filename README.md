@@ -83,8 +83,8 @@ Note: Aplication should be started in directory containing its files (get-richan
 
 * --id, -i         Number of ID
 * --name, -n       Name of character
-* --status, --st   Status: alive or dead
-* --species, --sp  Species of character
+* --status, -u   Status: alive or dead
+* --species, -p  Species of character
 * --type, -t       Type
 * --gender, -g     Gender: male or female
 * --origin, -o     Origin name
@@ -96,6 +96,6 @@ You can use any combination of these parameters for searching.
 `node index.js --id 2`<br>
 `node index.js --name 'rick sanchez' --status alive`<br>
 `node index.js --gender male --specious human`<br>
-`node index.js --gender Female --specious Human`<br>
+`node index.js --gender Female --status alive`<br>
 
 
