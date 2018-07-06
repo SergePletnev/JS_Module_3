@@ -17,23 +17,24 @@ function getRMDB(uri) {
 function checkCharacter(parameters, character) {
     let flag = true;
     Object.keys(parameters).forEach(el => {
-        if (el === 'id')
-            if (character[el] !== parameters[el]) {
-                flag = false;
-                return;
-            }
-        if (el === 'location' || el === 'origin') {
-            if (character[el]['name'].toLowerCase().indexOf(parameters[el].toLowerCase()) !== 0) {
-                flag = false;
-                return;
-            }
-        }
-        if (character[el].toString().toLowerCase().indexOf(parameters[el].toString().toLowerCase()) !== 0) {
-            flag = false;
-            return;
+        switch(el) {
+            case ('id'):
+                if (character[el] !== parameters[el]) {
+                    flag = false;
+                }
+                break;
+            case('location'):
+            case('origin'):
+                if (character[el]['name'].toLowerCase().indexOf(parameters[el].toLowerCase()) !== 0) {
+                    flag = false;
+                }
+                break;
+            default:
+                if (character[el].toString().toLowerCase().indexOf(parameters[el].toString().toLowerCase()) !== 0) {
+                    flag = false;
+                }
         }
     })
-
     if (flag)
         return character;
 }
@@ -55,7 +56,7 @@ function findCharacters(uri, args, filePath) {
                 writeCharactersToJSONFile(filePath, characters);
             } else {
                 throw new Error('No characters with such parameters');
-            }            
+            }
         })
         .catch(err => {
             console.log(err);
