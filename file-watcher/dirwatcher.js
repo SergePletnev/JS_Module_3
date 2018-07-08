@@ -11,7 +11,7 @@ class DirWatcher {
             persistent: true,
             interval: delay
         });
-        this.watcher.on("change", (file) => { this.emitter.emit("change", file); })
+        this.watcher.on("change", (file) => { this.emitter.emit("changed", file); })
         return this.emitter;
     }
 }

@@ -4,8 +4,8 @@ const Importer = require("./importer.js");
 function main() {
 
     const args = yargs
-        .option('pathToWatch', { alias: 'w', nargs: 1, type: 'string', default: './data/', describe: 'Path of the dir to whatch' })
-        .option('pathImportTo', { alias: 'i', nargs: 1, type: 'string', default: './resources/', describe: 'Path of the dir to import json files (objects)' })
+        .option('pathToWatch', { alias: 'w', nargs: 1, type: 'string', default: './data', describe: 'Path of the dir to whatch' })
+        .option('pathImportTo', { alias: 'i', nargs: 1, type: 'string', default: './resources', describe: 'Path of the dir to import json files (objects)' })
         .argv;
 
     const pathWatch = args.pathToWatch;

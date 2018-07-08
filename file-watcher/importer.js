@@ -14,9 +14,9 @@ class Importer {
 
     import() {
         return new Promise(resolve => {
-            this.watchFunc.on('change', file => {
+            this.watchFunc.on('changed', file => {
                 if (file.endsWith('.csv')) {
-                    console.log(`File ${file} has been changed`)
+                    console.log(`File ${path.basename(file)} has been changed.`)
                     csvtojson()
                         .fromFile(file)
                         .then(jsonArrayObj => {
@@ -29,9 +29,9 @@ class Importer {
     }
 
     importSync() {
-        this.watchFunc.on('change', file => {
+        this.watchFunc.on('changed', file => {
             if (file.endsWith('.csv')) {
-                console.log(`File ${file} has been changed`)
+                console.log(`File ${path.basename(file)} has been changed.`)
                 csvtojson()
                     .fromFile(file)
                     .then(jsonArrayObj => {

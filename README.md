@@ -83,8 +83,8 @@ Note: Aplication should be started in directory containing its files (get-richan
 
 * --id, -i         Number of ID
 * --name, -n       Name of character
-* --status, -u   Status: alive or dead
-* --species, -p  Species of character
+* --status, -u     Status: alive or dead
+* --species, -p    Species of character
 * --type, -t       Type
 * --gender, -g     Gender: male or female
 * --origin, -o     Origin name
@@ -99,3 +99,14 @@ You can use any combination of these parameters for searching.
 `node index.js --gender Female --status alive`<br>
 
 
+# File watcher app
+This application watches for changes in csv files in defined directory and exports csv to json files to defined directory.
+
+### Available parameters:
+
+* --pathToWatch        Path of the dir to whatch
+* --pathImportTo       Path of the dir to import json files (objects)
+
+Default values of parameters: <br>
+pathToWatch = './data'
+pathImportTo = './resources'
