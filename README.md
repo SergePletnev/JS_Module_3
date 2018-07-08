@@ -108,5 +108,5 @@ This application watches for changes in csv files in defined directory and expor
 * --pathImportTo       Path of the dir to import json files (objects)
 
 Default values of parameters: <br>
-pathToWatch = './data'
+pathToWatch = './data'<br>
 pathImportTo = './resources'
