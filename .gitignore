@@ -11,5 +11,4 @@ node_modules/
 package-lock.json
 
 ### Resources ###
-*.json
-*.xlsx
+resources/
