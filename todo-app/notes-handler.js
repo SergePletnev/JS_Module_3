@@ -6,7 +6,7 @@ class Notes {
 
     constructor(pathToNotesFile) {
         this.pathToNotesFile = pathToNotesFile;
-        this.notesList = this.checkAndReadNotesFile();
+        this.notesList = this.readNotesFile();
     }
 
     add(newNote) {
@@ -116,7 +116,7 @@ class Notes {
         }
     }
 
-    checkAndReadNotesFile() {
+    readNotesFile() {
         try {
             const notes = require(this.pathToNotesFile);
             return notes;
